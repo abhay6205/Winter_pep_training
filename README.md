@@ -1,2 +1,2 @@
 # Winter_pep_training
-repository for practice
+### this repo is for practice the question that has been taught by tutor
