@@ -1,0 +1,1 @@
+### Second day activity: revising different types of loops with example like for-loop, while-loop, after that some opearation on string like slicing, indexing
