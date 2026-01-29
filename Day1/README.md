@@ -1,0 +1,1 @@
+### First day activity:  introduction then after basic of python like how to print or how much you have prior knwoldge about python already
