@@ -18,6 +18,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from . import views
+from django.conf import settings
 
 urlpatterns = [
     path('portfolio/', include('portfolio.urls')),
@@ -27,4 +28,12 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     path('projects/', views.projects, name='projects'),
     path('content/', views.content, name='content'),
+    path('', include('theme.urls')),
+    path('signup/', views.signup, name='signup'),
 ]
+
+if settings.DEBUG:
+    # Include django_browser_reload URLs only in DEBUG mode
+    urlpatterns += [
+        path("__reload__/", include("django_browser_reload.urls")),
+    ]

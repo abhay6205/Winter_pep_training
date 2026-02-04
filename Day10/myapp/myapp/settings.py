@@ -24,13 +24,16 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 SECRET_KEY = 'django-insecure-rhocceyd3_e)2rwx(u$)i0gl$q(%36hy=7(ww=4m2+v+x6qv_&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+
 
 TAILWIND_APP_NAME = "theme"
 
 NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
+
+
 
 
 # Application definition
@@ -47,6 +50,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
+if DEBUG:
+    # Add django_browser_reload only in DEBUG mode
+    INSTALLED_APPS += ["django_browser_reload"]
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -56,6 +63,12 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+if DEBUG:
+    # Add django_browser_reload middleware only in DEBUG mode
+    MIDDLEWARE += [
+        "django_browser_reload.middleware.BrowserReloadMiddleware",
+    ]
 
 ROOT_URLCONF = 'myapp.urls'
 

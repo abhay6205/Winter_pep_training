@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.shortcuts import render
 # Create your views here.
 def index(request):
     # return HttpResponse("Hello, world. You're at the polls index.")
@@ -20,4 +19,7 @@ def content(request):
     return render(request, 'content.html')
 
 # def portfolio(request):
-    return HttpResponse("Welcome to the Portfolio Home Page.")
+#     return render(request, 'detail.html')
+
+def signup(request):
+    return render(request, 'signup.html')

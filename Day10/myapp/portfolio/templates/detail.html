@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <h1>Details</h1>
+
+    <ul>
+        {% for x in all_details %}
+        <li>{{ x.name }} - {{ x.email }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
