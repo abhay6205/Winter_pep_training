@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <h1>Contact</h1>
+    {% comment %} <p>This is the Contact of my Django application.</p> {% endcomment %}
+    <p>You can reach us at <a href="mailto:abhay11082005@gmail.com">abhay11082005@gmail.com</a></p>
+    <nav>
+        <ul>
+            <li><a href="{% url 'index' %}">Home</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'projects' %}">Projects</a></li>
+        </ul>
+    </nav>
+</body>
+</html>
