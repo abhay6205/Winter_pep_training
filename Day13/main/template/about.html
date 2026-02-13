@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me | Portfolio</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="{% url 'home_index' %}" class="logo">Dev<span>Portfolio</span></a>
+            <div class="nav-links">
+                <a href="{% url 'home_index' %}">Home</a>
+                <a href="{% url 'about_index' %}">About</a>
+                <a href="{% url 'service_index' %}">Services</a>
+            </div>
+            <a href="www.google.com" class="cta-btn">Contact</a>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <h1>About Me</h1>
+        <p>Passionate Developer & Technologist</p>
+    </div>
+
+    <main class="container">
+        <div class="card">
+            <h2>Who I Am</h2>
+            <p class="mt-2">
+                I am a passionate developer with a knack for building efficient and scalable web applications. 
+                With a strong foundation in Python and Django, I love turning complex problems into simple, beautiful solutions.
+            </p>
+            <p class="mt-2">
+                When I'm not coding, you can find me exploring new technologies, contributing to open source, or enjoying a good cup of coffee.
+            </p>
+        </div>
+
+        <div class="grid">
+            <div class="card text-center">
+                <h3>Python</h3>
+                <p>Expert proficiency in Python programming.</p>
+            </div>
+            <div class="card text-center">
+                <h3>Django</h3>
+                <p>Building robust web applications.</p>
+            </div>
+            <div class="card text-center">
+                <h3>Frontend</h3>
+                <p>HTML, CSS, and modern JavaScript.</p>
+            </div>
+            <div class="card text-center">
+                <h3>SQL</h3>
+                <p>Database management and optimization.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Abhay. All rights reserved.</p>
+    </footer>
+</body>
+</html>
