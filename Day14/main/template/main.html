@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Hub | Developer Portfolio</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="{% url 'home_index' %}" class="logo">Dev<span>Portfolio</span></a>
+            <div class="nav-links">
+                <a href="{% url 'home_index' %}">Home</a>
+                <a href="{% url 'about_index' %}">About</a>
+                <a href="{% url 'service_index' %}">Services</a>
+            </div>
+            <a href="www.google.com" class="cta-btn">Contact</a>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <h1>Dashboard</h1>
+        <p>Central hub for all activities.</p>
+    </div>
+
+    <main class="container">
+        <div class="grid">
+             <div class="card">
+                <h3>Stats</h3>
+                <p>View your site analytics.</p>
+            </div>
+            <div class="card">
+                <h3>Settings</h3>
+                <p>Configure your preferences.</p>
+            </div>
+             <div class="card">
+                <h3>Messages</h3>
+                <p>Check your latest notifications.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Abhay. All rights reserved.</p>
+    </footer>
+</body>
+</html>

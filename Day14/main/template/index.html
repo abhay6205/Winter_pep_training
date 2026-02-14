@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome | Developer Portfolio</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="{% url 'home_index' %}" class="logo">Dev<span>Portfolio</span></a>
+            <div class="nav-links">
+                <a href="{% url 'home_index' %}">Home</a>
+                <a href="{% url 'about_index' %}">About</a>
+                <a href="{% url 'service_index' %}">Services</a>
+            </div>
+            <a href='www.google.com' class="cta-btn">Contact</a>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <h1>Welcome</h1>
+        <p>Explore my portfolio projects and skills.</p>
+        <div style="margin-top: 2rem;">
+            <a href="{% url 'home_index' %}" class="cta-btn" style="background: white; color: var(--primary) !important; margin-right: 1rem;">Enter Site</a>
+        </div>
+    </div>
+
+    <main class="container">
+        <div class="text-center">
+            <h2>Latest Projects</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Project Alpha</h3>
+                    <p>A revolutionary app built with Django.</p>
+                </div>
+                <div class="card">
+                    <h3>Project Beta</h3>
+                    <p>Next-gen e-commerce platform.</p>
+                </div>
+                <div class="card">
+                    <h3>Project Gamma</h3>
+                    <p>AI-powered analytics dashboard.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Abhay. All rights reserved.</p>
+    </footer>
+</body>
+</html>
