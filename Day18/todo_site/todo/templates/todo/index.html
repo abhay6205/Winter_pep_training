@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>{{ title }}</title>
+</head>
+
+<body>
+
+{% if messages %}
+    {% for message in messages %}
+        <p>{{ message }}</p>
+    {% endfor %}
+{% endif %}
+
+<h1>TODO LIST PROJECT</h1>
+<hr>
+
+<h2>My Todo Lists</h2>
+<div style="display: flex; flex-wrap: wrap;">
+{% for todo_list in todo_lists %}
+    <div style="border: 1px solid #333; margin: 10px; padding: 10px; min-width: 300px;">
+        <h3 style="background-color: #eee; padding: 5px;">
+            {{ todo_list.name }}
+            <form action="/del_list/{{ todo_list.id }}" method="POST" style="display:inline; float:right;">
+                {% csrf_token %}
+                <button type="submit" onclick="return confirm('Are you sure?');" style="color:red; cursor:pointer;" title="Delete List">X</button>
+            </form>
+        </h3>
+        
+        <ul>
+        {% for i in todo_list.todo_set.all %}
+            <li>
+                <strong>{{ i.title }}</strong>
+                <p>{{ i.details }}</p>
+                <small>Date: {{ i.date }}</small>
+                <form action="/del/{{ i.id }}" method="POST" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit">Remove</button>
+                </form>
+            </li>
+            <hr>
+        {% empty %}
+            <li>No tasks in this list.</li>
+        {% endfor %}
+        </ul>
+    </div>
+{% endfor %}
+</div>
+
+<hr>
+
+<div style="display: flex; gap: 50px;">
+    <div>
+        <h2>Create New List</h2>
+        <form method="POST">
+            {% csrf_token %}
+            {{ list_form.as_p }}
+            <br>
+            <button  type="submit" name="save_list" style="background-color: red; color: white; border: none; padding: 10px 20px; cursor: pointer;">Create List</button>
+        </form>
+    </div>
+
+    <div>
+        <h2>Add New Task</h2>
+        <form method="POST">
+            {% csrf_token %}
+            {{ task_form.as_p }}
+            <br>
+            <button type="submit" name="save_task" style="background-color: red; color: white; border: none; padding: 10px 20px; cursor: pointer;">Add Task to List</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
