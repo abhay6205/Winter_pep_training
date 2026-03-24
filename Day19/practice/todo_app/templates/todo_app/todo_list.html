@@ -1,0 +1,135 @@
+{% extends "todo_app/base.html" %}
+
+{% block title %}My To-Do List{% endblock %}
+
+{% block content %}
+<header class="app-header">
+    <div class="header-content">
+        <div class="header-icon">
+            <span class="material-icons-round">checklist</span>
+        </div>
+        <h1>My To-Do List</h1>
+        <p class="subtitle">Stay organized, get things done.</p>
+    </div>
+    <div class="stats-bar">
+        <div class="stat">
+            <span class="stat-number">{{ total }}</span>
+            <span class="stat-label">Total</span>
+        </div>
+        <div class="stat">
+            <span class="stat-number completed-num">{{ completed }}</span>
+            <span class="stat-label">Done</span>
+        </div>
+        <div class="stat">
+            <span class="stat-number pending-num">{{ pending }}</span>
+            <span class="stat-label">Pending</span>
+        </div>
+    </div>
+</header>
+
+<!-- Create a New List -->
+<section class="add-todo-section">
+    <form method="POST" action="{% url 'add_task_list' %}" class="add-todo-form" id="addListForm">
+        {% csrf_token %}
+        <div class="form-group">
+            <div class="input-wrapper">
+                <span class="material-icons-round input-icon">playlist_add</span>
+                <input type="text" name="name" id="listName"
+                    placeholder="Create a new list (e.g. 1st January, Shopping...)" required autocomplete="off">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-add" id="addListBtn">
+            <span class="material-icons-round">add</span>
+            <span>Add List</span>
+        </button>
+    </form>
+</section>
+
+<!-- Task Lists -->
+<section class="todo-list-section">
+    {% if task_lists %}
+    {% for tl in task_lists %}
+    <div class="task-list-card" id="list-{{ tl.id }}">
+        <!-- List Header -->
+        <div class="task-list-header">
+            <div class="task-list-info">
+                <span class="material-icons-round list-icon">folder_open</span>
+                <h2 class="task-list-name">{{ tl.name }}</h2>
+                <span class="task-list-count">{{ tl.total_tasks }} task{{ tl.total_tasks|pluralize }}</span>
+            </div>
+            <div class="task-list-actions">
+                <!-- Progress -->
+                {% if tl.total_tasks > 0 %}
+                <div class="progress-ring-wrapper" title="{{ tl.progress_percent }}% complete">
+                    <svg class="progress-ring" width="32" height="32" viewBox="0 0 36 36">
+                        <circle class="progress-ring-bg" cx="18" cy="18" r="15.5" fill="none" stroke-width="3" />
+                        <circle class="progress-ring-fill" cx="18" cy="18" r="15.5" fill="none" stroke-width="3"
+                            stroke-dasharray="{{ tl.progress_percent }}, 100" />
+                    </svg>
+                    <span class="progress-text">{{ tl.progress_percent }}%</span>
+                </div>
+                {% endif %}
+                <form method="POST" action="{% url 'delete_task_list' tl.id %}" class="delete-form">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-delete-list" title="Delete list">
+                        <span class="material-icons-round">delete_outline</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Tasks inside this list -->
+        <ul class="todo-list">
+            {% for todo in tl.todos.all %}
+            <li class="todo-item {% if todo.completed %}completed{% endif %}" id="todo-{{ todo.id }}">
+                <form method="POST" action="{% url 'update_todo' todo.id %}" class="toggle-form">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-toggle" title="Toggle complete">
+                        <span class="material-icons-round">
+                            {% if todo.completed %}check_circle{% else %}radio_button_unchecked{% endif %}
+                        </span>
+                    </button>
+                </form>
+                <div class="todo-content">
+                    <span class="todo-title">{{ todo.title }}</span>
+                    {% if todo.description %}
+                    <span class="todo-description">{{ todo.description }}</span>
+                    {% endif %}
+                </div>
+                <form method="POST" action="{% url 'delete_todo' todo.id %}" class="delete-form">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-delete" title="Delete task">
+                        <span class="material-icons-round">delete_outline</span>
+                    </button>
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
+
+        <!-- Add task inside this list -->
+        <form method="POST" action="{% url 'add_todo' tl.id %}" class="inline-add-form">
+            {% csrf_token %}
+            <div class="inline-input-row">
+                <div class="input-wrapper inline-input">
+                    <span class="material-icons-round input-icon">add_circle_outline</span>
+                    <input type="text" name="title" placeholder="Add a task..." required autocomplete="off">
+                </div>
+                <div class="input-wrapper inline-input desc-input">
+                    <input type="text" name="description" placeholder="Description (optional)" autocomplete="off">
+                </div>
+                <button type="submit" class="btn btn-inline-add" title="Add task">
+                    <span class="material-icons-round">add</span>
+                </button>
+            </div>
+        </form>
+    </div>
+    {% endfor %}
+    {% else %}
+    <div class="empty-state" id="emptyState">
+        <span class="material-icons-round empty-icon">task_alt</span>
+        <h3>No lists yet!</h3>
+        <p>Create a list above to start organizing your tasks.</p>
+    </div>
+    {% endif %}
+</section>
+{% endblock %}
